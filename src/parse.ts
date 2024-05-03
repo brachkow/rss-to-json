@@ -1,10 +1,10 @@
 import { XMLParser } from 'fast-xml-parser';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, {Options as AxiosRequestConfig} from 'redaxios'
 
 export default async (url: string, config?: AxiosRequestConfig) => {
     if (!/(^http(s?):\/\/[^\s$.?#].[^\s]*)/i.test(url)) return null;
 
-    const { data } = await axios(url, config);
+    const data  = (await axios(url, config)).data as string;
 
     const xml = new XMLParser({
         attributeNamePrefix: '',
